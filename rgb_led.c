@@ -35,3 +35,21 @@ void RGB_LED_Init(void)
         /* Auto-reload register */
         WRITE_REG(TIM2->ARR, 255);
 }
+
+void RGB_LED_Stop(void)
+{
+        /* Disable counter */           
+        CLEAR_BIT(TIM2->CR1, TIM_CR1_CEN);
+
+        /* Re-initialize the counter */
+        SET_BIT(TIM2->EGR, TIM_EGR_UG);
+}
+
+void RGB_LED_Start(void)
+{
+        /* Re-initialize the counter */
+        SET_BIT(TIM2->EGR, TIM_EGR_UG);
+
+        /* Enable counter */           
+        SET_BIT(TIM2->CR1, TIM_CR1_CEN);
+}

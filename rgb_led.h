@@ -14,10 +14,11 @@ extern "C" {
 #error "Uncomment TIM2_FREQUENCY from rgb_led.h or define your own"
 #endif
 
-void RGB_LED_Init(void);
 void RGB_LED_DeInit(void);
-void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue);
+void RGB_LED_Init(void);
 void RGB_LED_Stop(void);
+void RGB_LED_Start(void);
+void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue);
 
 #ifdef __cplusplus
 }
