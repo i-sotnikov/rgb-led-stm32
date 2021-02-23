@@ -38,7 +38,7 @@ void RGB_LED_Init(void)
 
 void RGB_LED_Stop(void)
 {
-        /* Disable counter */           
+        /* Disable counter */
         CLEAR_BIT(TIM2->CR1, TIM_CR1_CEN);
 
         /* Re-initialize the counter */
@@ -50,6 +50,14 @@ void RGB_LED_Start(void)
         /* Re-initialize the counter */
         SET_BIT(TIM2->EGR, TIM_EGR_UG);
 
-        /* Enable counter */           
+        /* Enable counter */
         SET_BIT(TIM2->CR1, TIM_CR1_CEN);
+}
+
+void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue)
+{
+        /* Compare registers for channels 2, 3, 4 */
+        WRITE_REG(TIM2->CCR2, red);
+        WRITE_REG(TIM2->CCR3, green);
+        WRITE_REG(TIM2->CCR4, blue);
 }
