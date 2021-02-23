@@ -18,8 +18,7 @@ void RGB_LED_Init(void)
                    GPIO_CRL_MODE1_1 | GPIO_CRL_CNF1_1 |
                    GPIO_CRL_MODE2_1 | GPIO_CRL_CNF2_1 |
                    GPIO_CRL_MODE3_1 | GPIO_CRL_CNF3_1);
-
-        /* TIM2 initialization, channels 2, 3, 4 */
+/* TIM2 initialization, channels 2, 3, 4 */
         /* Enable compare */
         SET_BIT(TIM2->CCER, TIM_CCER_CC2E | TIM_CCER_CC3E | TIM_CCER_CC4E);
 
@@ -38,7 +37,7 @@ void RGB_LED_Init(void)
 
 void RGB_LED_Stop(void)
 {
-        /* Disable counter */           
+        /* Disable counter */
         CLEAR_BIT(TIM2->CR1, TIM_CR1_CEN);
 
         /* Re-initialize the counter */
@@ -50,6 +49,14 @@ void RGB_LED_Start(void)
         /* Re-initialize the counter */
         SET_BIT(TIM2->EGR, TIM_EGR_UG);
 
-        /* Enable counter */           
+        /* Enable counter */
         SET_BIT(TIM2->CR1, TIM_CR1_CEN);
+}
+
+void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue)
+{
+        /* Compare registers for channels 2, 3, 4 */
+        WRITE_REG(TIM2->CCR2, red);
+        WRITE_REG(TIM2->CCR3, green);
+        WRITE_REG(TIM2->CCR4, blue);
 }
