@@ -2,10 +2,24 @@
 
 void RGB_LED_Reset(void)
 {
-        /* TIM2 Deinitialization*/
+        #ifdef RCC_GPIO_RESET
+        /* GPIO port A clock disable */
+        CLEAR_BIT(RCC->ABP2ENR, RCC_APB2ENR_IOPAEN);
+        #endif
+
+        /* TIM2 Deinitialization */
+        /* TIM2 timer clock disable */
+        CLEAR_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);
+
         /* Reset control registers 1, 2 */
         CLEAR_REG(TIM2->CR1);
         CLEAR_REG(TIM2->CR2);
+
+        /* Reset slave mode control register */
+        CLEAR_REG(TIM2->SMCR);
+
+        /* Reset DMA/Interrupt enable register */
+        CLEAR_REG(TIM2->DIER);
 
         /* Reset capture/compare enable register */
         CLEAR_REG(TIM2->CCER);
@@ -14,16 +28,29 @@ void RGB_LED_Reset(void)
         CLEAR_REG(TIM2->CCMR1);
         CLEAR_REG(TIM2->CCMR2);
 
-        /* Reset capture/compare registers 2, 3, 4 */
+        /* Reset counter */
+        CLEAR_REG(TIM2->CNT);
+
+        /* Reset capture/compare registers 1, 2, 3, 4 */
+        CLEAR_REG(TIM2->CCR1);
         CLEAR_REG(TIM2->CCR2);
         CLEAR_REG(TIM2->CCR3);
         CLEAR_REG(TIM2->CCR4);
+
+        /* Reset DMA control register */
+        CLEAR_REG(TIM2->DCR);
+
+        /* Reset DMA address for full transfer */
+        CLEAR_REG(TIM2->DMAR);
 
         /* Reset prescaler */
         CLEAR_REG(TIM2->PSC);
 
         /* Reset auto-reload register */
         WRITE_REG(TIM2->ARR, 0xFFFF);
+
+        /* Re-initialize the counter */
+        SET_BIT(TIM2->EGR, TIM_EGR_UG);
 }
 
 void RGB_LED_Init(void)
