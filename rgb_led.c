@@ -1,5 +1,31 @@
 #include "rgb_led.h"
 
+void RGB_LED_Reset(void)
+{
+        /* TIM2 Deinitialization*/
+        /* Reset control registers 1, 2 */
+        CLEAR_REG(TIM2->CR1);
+        CLEAR_REG(TIM2->CR2);
+
+        /* Reset capture/compare enable register */
+        CLEAR_REG(TIM2->CCER);
+
+        /* Reset capture/compare mode registers 1, 2 */
+        CLEAR_REG(TIM2->CCMR1);
+        CLEAR_REG(TIM2->CCMR2);
+
+        /* Reset capture/compare registers 2, 3, 4 */
+        CLEAR_REG(TIM2->CCR2);
+        CLEAR_REG(TIM2->CCR3);
+        CLEAR_REG(TIM2->CCR4);
+
+        /* Reset prescaler */
+        CLEAR_REG(TIM2->PSC);
+
+        /* Reset auto-reload register */
+        WRITE_REG(TIM2->ARR, 0xFFFF);
+}
+
 void RGB_LED_Init(void)
 {
         /* RCC initialization */
@@ -59,30 +85,4 @@ void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue)
         WRITE_REG(TIM2->CCR2, red);
         WRITE_REG(TIM2->CCR3, green);
         WRITE_REG(TIM2->CCR4, blue);
-}
-
-void RGB_LED_DeInit(void)
-{
-        /* TIM2 Deinitialization*/
-        /* Reset control registers 1,2 */
-        CLEAR_REG(TIM2->CR1);
-        CLEAR_REG(TIM2->CR2);
-
-        /* Reset capture/compare enable register */
-        CLEAR_REG(TIM2->CCER);
-
-        /* Reset capture/compare mode registers 1,2 */
-        CLEAR_REG(TIM2->CCMR1);
-        CLEAR_REG(TIM2->CCMR2);
-
-        /* Reset capture/compare registers 2,3,4 */
-        CLEAR_REG(TIM2->CCR2);
-        CLEAR_REG(TIM2->CCR3);
-        CLEAR_REG(TIM2->CCR4);
-
-        /* Reset prescaler */
-        CLEAR_REG(TIM2->PSC);
-
-        /* Reset auto-reload register */
-        WRITE_REG(TIM2->ARR, 0xFFFF);
 }
