@@ -14,7 +14,7 @@ extern "C" {
 #error "Uncomment TIM2_FREQUENCY from rgb_led.h or define your own"
 #endif
 
-void RGB_LED_DeInit(void);
+void RGB_LED_Reset(void);
 void RGB_LED_Init(void);
 void RGB_LED_Stop(void);
 void RGB_LED_Start(void);
