@@ -82,7 +82,7 @@ void RGB_LED_Init(void)
                              TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2);
 
         /* Prescaler */
-        WRITE_REG(TIM2->PSC, TIM2_FREQUENCY / 5000000);
+        WRITE_REG(TIM2->PSC, TIM2_FREQUENCY / 250000);
 
         /* Auto-reload register */
         WRITE_REG(TIM2->ARR, 255);
