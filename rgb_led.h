@@ -14,7 +14,8 @@ extern "C" {
 #error "Uncomment TIM2_FREQUENCY from rgb_led.h or define your own"
 #endif
 
-/* #define RCC_GPIO_RESET */    /*If defined, the function RGB_LED_Reset() disables the clocking of port A*/
+/* If defined, the function RGB_LED_Reset() disables the clocking of port A */
+/* #define RCC_GPIO_RESET */
 
 void RGB_LED_Reset(void);
 void RGB_LED_Init(void);
