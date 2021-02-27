@@ -6,7 +6,7 @@
 микроконтроллеров **STM32F103Cxxx**.
 ## Описание функций библиотеки
 В состав библиотеки входит пять функций:
-```C+
+```c
 void RGB_LED_Reset(void);
 void RGB_LED_Init(void);
 void RGB_LED_Stop(void);
@@ -20,7 +20,7 @@ void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue);
     Также функция может отключать тактирование
     используемого порта GPIOA при раскомментировании
     соответствующей строки: 
-    ```C
+    ```c
     /* #define RCC_GPIO_RESET */
     ...
     #ifdef RCC_GPIO_RESET
@@ -33,7 +33,7 @@ void RGB_LED_Set(uint8_t red, uint8_t green, uint8_t blue);
     Данная функция ...<br>
     Для работы функции необходимо раскомментировать строку
     с нужной частотой тактирования таймера:
-    ```C
+    ```c
     /* #define TIM2_FREQUENCY 8000000 */
     /* #define TIM2_FREQUENCY 72000000 */
     ```
